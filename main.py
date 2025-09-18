@@ -8,6 +8,25 @@ import openai
 import os
 from typing import List, Dict
 
+class BaseOpenAI:
+    """Base class for OpenAI implementations"""
+    pass
+
+class OpenAI(BaseOpenAI):
+    """OpenAI LLM using BaseOpenAI Class.
+    An API call to OpenAI API is sent and response is recorded and returned.
+    The default chat model is **gpt-3.5-turbo**.
+    The list of supported Chat models includes ["gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "gpt-4o", "gpt-4o-mini", "gpt-4", "gpt-4-0613", "gpt-4-32k",
+     "gpt-4-32k-0613", "gpt-3.5-turbo", "gpt-3.5-turbo-16k", "gpt-3.5-turbo-0613",
+     "gpt-3.5-turbo-16k-0613", "gpt-3.5-turbo-instruct"].
+    The list of supported Completion models includes "gpt-3.5-turbo-instruct" and other legacy models.
+    """
+
+    def __init__(self, api_key: str, model: str = "gpt-3.5-turbo"):
+        """Initialize OpenAI client with API key and model."""
+        openai.api_key = api_key
+        self.model = model
+
 class FlightChatbot:
     def __init__(self, api_key: str):
         openai.api_key = api_key
